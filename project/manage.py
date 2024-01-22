@@ -3,10 +3,12 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "todo_project.settings")
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_project.settings')
+    # Check if the runserver command is used without specifying a port
+    if len(sys.argv) == 2 and sys.argv[1] == 'runserver':
+        sys.argv.append('0.0.0.0:8080')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -17,6 +19,5 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
